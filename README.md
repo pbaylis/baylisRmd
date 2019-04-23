@@ -1,8 +1,10 @@
 # baylisRmd
-Rmarkdown template files
+Package to hold various RMarkdown templates.
 
-- Beamer template
-- Document template
+## Current templates 
+
+- `baylis-beamer`: Clean beamer slides for presentations.
+  - Example in `example-beamer/`
 
 # Useful links
 
