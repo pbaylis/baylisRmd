@@ -1,0 +1,63 @@
+---
+title: Beamer presentation
+subtitle: Subtitle
+author: Patrick Baylis
+date: \today
+institute: University of British Columbia
+output:
+ beamer_presentation:
+    template: baylis-latex-beamer.tex
+    toc: false
+    keep_tex: true
+    slide_level: 2
+---
+
+# Section title
+
+## Slide title
+
+__Numbered List__
+
+1. Item 1
+2. Item 2
+3. Item 3
+
+**Concept**
+
+- Definition of concept
+
+## Slide title
+
+- Here's some code with output
+
+```{r cars}
+summary(cars)
+```
+
+## Slide title
+
+![Figure caption](logo.png)
+
+## Plot
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+## Custom slide (two columns)
+
+Sometimes you just have to get your hands dirty with \LaTeX.
+
+\begin{columns}
+	\begin{column}{0.5\textwidth}
+	   some text here some text here some text here some text here some text here
+	\end{column}
+	\begin{column}{0.5\textwidth}  %%<--- here
+	    \begin{center}
+	     \includegraphics[width=1\textwidth]{logo.png}
+	    \end{center}
+	\end{column}
+\end{columns}
+
