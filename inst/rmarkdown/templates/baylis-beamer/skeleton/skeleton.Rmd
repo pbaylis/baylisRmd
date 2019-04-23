@@ -6,7 +6,7 @@ date: 2019-04-03
 institute: University of British Columbia
 output:
  beamer_presentation:
-    template: svm-latex-beamer.tex
+    template: baylis-latex-beamer.tex
     toc: false
     keep_tex: true
     slide_level: 2
