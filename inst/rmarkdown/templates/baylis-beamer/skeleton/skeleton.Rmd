@@ -1,0 +1,47 @@
+---
+title: Beamer presentation
+subtitle: Subtitle
+author: Patrick Baylis
+date: 2019-04-03
+institute: University of British Columbia
+output:
+ beamer_presentation:
+    template: svm-latex-beamer.tex
+    toc: false
+    keep_tex: true
+    slide_level: 2
+---
+
+# Section title
+
+## Slide title
+
+__Numbered List__
+
+1. Item 1
+2. Item 2
+3. Item 3
+
+**Concept**
+
+- Definition of concept
+
+## Slide title
+
+- Here's some code with output
+
+```{r cars}
+summary(cars)
+```
+
+## Slide title
+
+![Figure caption](logo.png)
+
+## Plot
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
