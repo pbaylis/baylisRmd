@@ -1,0 +1,19 @@
+---
+output: 
+  pdf_document:
+    citation_package: biblatex
+    keep_tex: true
+    fig_caption: true
+    template: baylis-ms.tex
+    latex_engine: xelatex
+title: "Title"
+author: Patrick Baylis
+affiliation: University of British Columbia
+abstract: "Abstract text."
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+bibliography: refs.bib
+---
+
+# Section
+
+Manuscript text. \citet{fakeref2009} said something really important.

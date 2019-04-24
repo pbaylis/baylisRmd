@@ -1,0 +1,26 @@
+---
+output: 
+  pdf_document:
+    citation_package: biblatex
+    keep_tex: true
+    fig_caption: true
+    template: ~/github/baylisRmd/inst/rmarkdown/templates/baylis-ms/skeleton/baylis-ms.tex
+    latex_engine: xelatex
+title: "Summary of ..."
+author: Patrick Baylis
+affiliation: University of British Columbia
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+bibliography: refs.bib
+---
+
+# Summary
+
+- Authors
+- Journal
+- Why interesting/important?
+- Data
+- Research Design
+- Findings
+- Contributions
+
+# Other notes
