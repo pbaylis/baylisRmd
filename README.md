@@ -5,6 +5,8 @@ Package to hold various RMarkdown templates.
 
 - `baylis-beamer`: Clean beamer slides for presentations.
   - Example in `example-beamer/`
+- `baylis-ms`: Generic manuscript template. Uses Palatino instead of usual Latin Modern.
+- `baylis-paper-summary`: Same as `baylis-ms` but prepopulated with a list to be filled in for paper summaries. Useful for literature reviews.
 
 # Useful links
 
