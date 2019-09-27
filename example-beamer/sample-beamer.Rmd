@@ -2,11 +2,11 @@
 title: Beamer presentation
 subtitle: Subtitle
 author: Patrick Baylis
-date: \today
+date: 2019-04-03
 institute: University of British Columbia
 output:
  beamer_presentation:
-    template: baylis-latex-beamer.tex
+    template: beamer-options.tex
     toc: false
     keep_tex: true
     slide_level: 2
@@ -22,9 +22,17 @@ __Numbered List__
 2. Item 2
 3. Item 3
 
+\vfill
+
 **Concept**
 
 - Definition of concept
+
+- Another bullet 
+
+  - A sub-bullet
+  
+- Dumm dum 
 
 ## Slide title
 
@@ -46,18 +54,12 @@ You can also embed plots, for example:
 plot(pressure)
 ```
 
-## Custom slide (two columns)
+# Next section title
 
-Sometimes you just have to get your hands dirty with \LaTeX.
+## What else to say?
 
-\begin{columns}
-	\begin{column}{0.5\textwidth}
-	   some text here some text here some text here some text here some text here
-	\end{column}
-	\begin{column}{0.5\textwidth}  %%<--- here
-	    \begin{center}
-	     \includegraphics[width=1\textwidth]{logo.png}
-	    \end{center}
-	\end{column}
-\end{columns}
-
+- Another list
+  - Sub-item
+    - sub-sub-item
+- Back to the main item
+  

@@ -1,9 +1,34 @@
 % \documentclass[$if(fontsize)$$fontsize$,$endif$$if(lang)$$babel-lang$,$endif$$if(papersize)$$papersize$,$endif$$for(classoption)$$classoption$$sep$,$endfor$]{article}
 \documentclass{article}
 \usepackage[margin=1.25in]{geometry}
+% Include packages given in pandoc manual
+% \usepackage{lm}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{ifxetex}
+\usepackage{ifluatex}
+\usepackage{listings}
+\usepackage{fancyvrb}
+\usepackage{longtable}
+\usepackage{booktabs}
 \usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{ulem}
+\usepackage{setspace}
+\usepackage{polyglossia}
+\setdefaultlanguage{english}
+\usepackage{csquotes}
+\usepackage{fontspec}
+% \usepackage{xecjk}
+\usepackage{upquote}
+\usepackage{microtype}
+\usepackage{parskip}
+\usepackage{bookmark}
+\usepackage{footnotehyper}
+
 $if(fontfamily)$
 \usepackage[$fontfamilyoptions$]{$fontfamily$}
+\usepackage{unicode-math} % Causes arrowvert clash with newpxmath
 $else$
 \usepackage{newpxtext,newpxmath} % Palatino
 $endif$
@@ -30,9 +55,9 @@ $endif$
 
 $if(title)$
 \title{$title$$if(subtitle)$: $subtitle$$endif$ $if(anonymous)$$else$$if(thanks)$\thanks{$thanks$} $endif$$endif$ }
-$endif$
 \author{$author$}
 \date{$date$}
+$endif$
 
 $for(header-includes)$
 $header-includes$
@@ -41,6 +66,8 @@ $endfor$
 % Add tightlist so that pandoc works
 \providecommand{\tightlist}{%
 \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+\usepackage{bidi} % Has to be loaded as late as possible
 
 \begin{document}
 
@@ -53,7 +80,6 @@ $if(abstract)$
 \begin{abstract}
 $abstract$
 \end{abstract}
-
 $endif$
 
 $if(toc)$

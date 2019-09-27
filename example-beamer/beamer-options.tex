@@ -1,4 +1,4 @@
-\documentclass[$if(fontsize)$$fontsize$,$endif$$if(lang)$$babel-lang$,$endif$$if(handout)$handout,$endif$$if(beamer)$ignorenonframetext,$endif$$for(classoption)$$classoption$$sep$,$endfor$$if(make149)$,aspectratio=149$endif$]{$documentclass$}
+\documentclass[$if(fontsize)$$fontsize$,$endif$$if(lang)$$babel-lang$,$endif$$if(handout)$handout,$endif$$if(beamer)$ignorenonframetext,$endif$$for(classoption)$$classoption$$sep$,$endfor$$if(make149)$,aspectratio=169$endif$]{$documentclass$}
 $if(theme)$
 \usetheme{$theme$}
 $endif$
@@ -116,7 +116,7 @@ $if(graphics)$
 \makeatother
 % Scale images if necessary, so that they will not overflow the page
 % margins by default, and it is still possible to overwrite the defaults
-% using explicit options in \includegraphics[width, height, ...]{}
+% using explicit options i    n \includegraphics[width, height, ...]{}
 \setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
 $endif$
 
@@ -183,33 +183,106 @@ $if(author)$
 \author{$for(author)$$author$$sep$ \and $endfor$}
 $endif$
 \date{$date$}
+$if(institute)$
+\institute{$institute$}
+$endif$
 $for(header-includes)$
 $header-includes$
 $endfor$
 
-% Everything I added ------------------
-% PACKAGES
-\usepackage{booktabs} % Nice tables
+% ADDITIONAL PREAMBLE ------------------
+% Combination of my code and Paul Goldsmith-Pinkham's Beamer Tips
+% PGP source: https://github.com/paulgp/beamer-tips/blob/master/slides.pdf
 \usepackage{dcolumn} % Booktabs column spacing
 \usepackage{threeparttable} % Align column caption, table, and notes
 \usepackage{adjustbox} % Shrink stuff
 \usepackage[onecol]{hackthefootline}
 \htfconfig{title=none, authinst=none, date=none, framenrs=counter, atsep=colon}
+\usepackage{graphicx}
+\usepackage{helvet}
+\usepackage[default]{lato}
+\usepackage{array}
+\usepackage{tikz}
+\usepackage{verbatim}
+\usepackage{mathpazo}
+\usepackage{hyperref}
+\usepackage{multimedia}
+\usepackage{dcolumn}
+\usepackage{bbm}
+\usepackage{changepage}
+\usepackage{appendixnumberbeamer}
 
-% STYLE
-\setbeamersize{text margin left=1em,text margin right=1em}
-\addtobeamertemplate{frametitle}{}{\vspace*{-1ex}\rule{\textwidth}{1pt}}
-\setbeamertemplate{navigation symbols}{}
+%%%%% BACKUP SLIDES
+% Use \beginbackup to start appendix/backup slides and \backupend to end it
+\newcommand{\beginbackup}{
+   \newcounter{framenumbervorappendix}
+   \setcounter{framenumbervorappendix}{\value{framenumber}}
+   \setbeamertemplate{footline}
+   {
+     \leavevmode%
+     \hline
+     box{%
+       \begin{beamercolorbox}[wd=\paperwidth,ht=2.25ex,dp=1ex,right]{footlinecolor}%
+%         \insertframenumber  \hspace*{2ex}
+       \end{beamercolorbox}}%
+     \vskip0pt%
+   }
+ }
+\newcommand{\backupend}{
+   \addtocounter{framenumbervorappendix}{-\value{framenumber}}
+   \addtocounter{framenumber}{\value{framenumbervorappendix}}
+}
 
-% Created rounded, colored blocks
-\setbeamertemplate{blocks}[rounded][shadow=false]
+%%%%% COLORS
 \setbeamercolor{block title}{parent=palette primary, bg=structure, fg=white}
 \setbeamercolor{block body}{fg=black, bg=black!20!white}
+
+% These are my colors -- there are many like them, but these ones are mine.
+\definecolor{blue}{RGB}{0,114,178}
+\definecolor{red}{RGB}{213,94,0}
+\definecolor{yellow}{RGB}{240,228,66}
+\definecolor{green}{RGB}{0,158,115}
+
+\hypersetup{
+  colorlinks=false,
+  linkbordercolor = {white},
+  linkcolor = {blue}
+}
+
+\setbeamercolor{frametitle}{fg=blue}
+\setbeamercolor{title}{fg=black}
+\setbeamertemplate{footline}[frame number]
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{itemize items}{-}
+\setbeamercolor{itemize item}{fg=blue}
+\setbeamercolor{itemize subitem}{fg=blue}
+\setbeamercolor{enumerate item}{fg=blue}
+\setbeamercolor{enumerate subitem}{fg=blue}
+\setbeamercolor{button}{bg=MyBackground,fg=blue,}
+
+%%% Background
+% \definecolor{MyBackground}{RGB}{255,253,218} %%% PGP's beige off-white
+%\setbeamercolor{background canvas}{bg=MyBackground}
+
+%%%%% STYLING
+
+%%% Underlined titles
+\addtobeamertemplate{frametitle}{}{\vspace*{-1ex}\rule{\textwidth}{1pt}}
+
+%%% Margins
+\setbeamersize{text margin left=1em,text margin right=1em}
+\setbeamercolor{section in toc}{fg=blue}
+\setbeamercolor{subsection in toc}{fg=red}
+
+%%% Navigation
+\setbeamertemplate{navigation symbols}{}
+
+%%% Round blocks, remove drop shadow
+\setbeamertemplate{blocks}[rounded][shadow=false]
 
 % Automatically center images
 % Note: this is for ![](image.png) images
 % Use "fig.align = "center" for R chunks
-
 \usepackage{etoolbox}
 
 \AtBeginDocument{%
@@ -221,21 +294,44 @@ $endfor$
   }%
 }
 
-% Hack for flexible item spacing
-\let\olditem\item
-\renewcommand{\item}{%
-\olditem\vspace{\fill}}
+%%% Roadmap: uncomment to get a roadmap at the start of each section
+% \AtBeginSection[]
+% {
+%    \begin{frame}
+%        \frametitle{Roadmap of Talk}
+%        \tableofcontents[currentsection]
+%    \end{frame}
+% }
 
-% Custom commands
+%%%%% LIST SPACING
+
+% Approach 1: Spread items out vertically to fill space
+% This looks (mostly) good, but weird when there are more objects in the same space
+% \let\olditem\item
+% \renewcommand{\item}{%
+% \olditem\vspace{\fill}}
+
+% Approach 2: Increase itemsep for itemize and enumerate
+% Pandoc writes tightlist before any itemize when there's only a single linebreak between items, so:
+\def\tightlist{} % Redefine tightlist to be nothing
+
+% Now, redefine itemize and enumerate with more space in between itemize
+\let\OLDitemize\itemize % Avoid recusion problems
+\renewcommand\itemize{\OLDitemize\addtolength{\itemsep}{10pt}}
+\let\OLDenumerate\enumerate % Avoid recusion problems
+\renewcommand\enumerate{\OLDenumerate\addtolength{\itemsep}{10pt}}
+
+% Still, need to be a bit careful to add spaces manually using, e.g., \vfill or \vspace
+
+%%%%% CUSTOM COMMANDS
 \newcommand{\btVFill}{\vskip0pt plus 1filll}
-% Custom commands
 \newcommand{\fp}[2]{\frac{\partial #1}{\partial #2}}
 \newcommand{\fpw}[2]{\partial #1 / \partial #2}
 \newcommand{\Lagr}{\mathcal{L}}
 \newcommand{\ve}{\varepsilon}
 \newcommand{\lm}{\lambda}
 
-% Okay, and begin the actual document...
+%%%%% BEGIN THE DOCUMENT %%%%%
 
 \begin{document}
 $if(title)$
