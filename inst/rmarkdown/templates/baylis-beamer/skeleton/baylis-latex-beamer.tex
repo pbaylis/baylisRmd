@@ -222,9 +222,22 @@ $endfor$
 }
 
 % Hack for flexible item spacing
-\let\olditem\item
-\renewcommand{\item}{%
-\olditem\vspace{\fill}}
+% \let\olditem\item
+% \renewcommand{\item}{%
+% \olditem\vspace{\fill}}
+
+% Better hack, maybe. Only spaces out first level items.
+% https://tex.stackexchange.com/questions/369504/beamer-vertically-stretching-level-1-list-items-in-a-nested-list-environment
+\usepackage{xpatch}
+\xpatchcmd{\itemize}
+  {\def\makelabel}
+  {\ifnum\@itemdepth=1\relax
+     \setlength\itemsep{\fill}% separation for first level
+   \fi\def\makelabel
+  }{}{}
+\xpatchcmd{\enditemize}
+  {\endlist}
+  {\endlist\ifnum\@itemdepth<2\else\vfil\fi}{}{}
 
 % Custom commands
 \newcommand{\btVFill}{\vskip0pt plus 1filll}
